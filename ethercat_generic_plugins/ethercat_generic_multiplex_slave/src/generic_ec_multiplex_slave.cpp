@@ -16,7 +16,7 @@
 
 #include <numeric>
 
-#include "ethercat_generic_plugins/generic_ec_cia402_drive.hpp"
+#include "ethercat_generic_plugins/generic_ec_multiplex_slave.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 namespace ethercat_generic_plugins
