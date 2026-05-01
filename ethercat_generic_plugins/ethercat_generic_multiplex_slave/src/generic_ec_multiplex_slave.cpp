@@ -23,7 +23,11 @@ namespace ethercat_generic_plugins
 {
 
   EcMultiplexSlave::EcMultiplexSlave()
-      : GenericEcSlave() {}
+      : GenericEcSlave()
+  {
+
+    std::cout << "Creating Multiplex Slave" << std::endl;
+  }
   EcMultiplexSlave::~EcMultiplexSlave() {}
 
   bool EcMultiplexSlave::initialized() { return initialized_; }
@@ -39,6 +43,8 @@ namespace ethercat_generic_plugins
       std::vector<double> *state_interface,
       std::vector<double> *command_interface)
   {
+    std::cout << "Setting up Multiplex Slave" << std::endl;
+
     if (subUnits_[0] == nullptr)
     {
       subUnits_[0] = new EcCiA402Drive();
