@@ -66,10 +66,10 @@ namespace ethercat_generic_plugins
   void EcMultiplexSlave::processData(size_t entry_idx, uint8_t *domain_address)
   {
     // hack copy internal config data !!!
-    alias_ = subUnits_[0]->alias;
-    position_ = subUnits_[0]->position;
-    vendor_id_ = subUnits_[0]->vendor_id;
-    product_id_ = subUnits_[0]->product_id;
+    alias_ = subUnits_[0]->alias_;
+    position_ = subUnits_[0]->position_;
+    vendor_id_ = subUnits_[0]->vendor_id_;
+    product_id_ = subUnits_[0]->product_id_;
     sdo_config = subUnits_[0]->sdo_config;
     // !!!
 
@@ -88,13 +88,6 @@ namespace ethercat_generic_plugins
     {
       subUnits_[0] = new EcCiA402Drive();
       auto r = subUnits_[0]->setupSlave(slave_parameters, state_interface, command_interface);
-      // hack copy internal config data !!!
-      alias_ = subUnits_[0]->alias;
-      position_ = subUnits_[0]->position;
-      vendor_id_ = subUnits_[0]->vendor_id;
-      product_id_ = subUnits_[0]->product_id;
-      sdo_config = subUnits_[0]->sdo_config;
-      // !!!
       return r;
     }
     return true;
