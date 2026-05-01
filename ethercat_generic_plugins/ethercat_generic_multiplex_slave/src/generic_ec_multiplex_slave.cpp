@@ -32,6 +32,15 @@ namespace ethercat_generic_plugins
 
   bool EcMultiplexSlave::initialized() { return initialized_; }
 
+  int EcMultiplexSlave::assign_activate_dc_sync()
+  {
+    if (subUnits_[0] != nullptr)
+    {
+      return subUnits_[0]->assign_activate_dc_sync();
+    }
+    return 0;
+  }
+
   const ec_sync_info_t *EcMultiplexSlave::syncs()
   {
     return subUnits_[0]->syncs();

@@ -36,6 +36,7 @@ namespace ethercat_generic_plugins
   public:
     EcMultiplexSlave();
     virtual ~EcMultiplexSlave();
+    virtual int assign_activate_dc_sync();
 
     virtual const ec_sync_info_t *syncs();
     virtual size_t syncSize();
