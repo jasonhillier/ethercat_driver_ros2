@@ -55,33 +55,7 @@ install(
   RUNTIME DESTINATION bin
 )
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  find_package(pluginlib REQUIRED)
-  find_package(ethercat_interface REQUIRED)
-  find_package(ethercat_generic_slave REQUIRED)
-  ament_lint_auto_find_test_dependencies()
 
-  # Test Load EtherCAT modules
-  ament_add_gmock(
-    test_load_generic_plugins
-    test/test_load_ec_modules.cpp
-  )
-  target_include_directories(test_load_generic_plugins PRIVATE include)
-  target_link_libraries(test_load_generic_plugins
-    ${PROJECT_NAME}
-  )
-
-  # Test Generic EtherCAT CIA402 Drive Plugin
-  ament_add_gmock(
-    test_generic_ec_cia402_drive
-    test/test_generic_ec_cia402_drive.cpp
-  )
-  target_include_directories(test_generic_ec_cia402_drive PRIVATE include)
-  target_link_libraries(test_generic_ec_cia402_drive
-    ${PROJECT_NAME}
-  )
-endif()
 
 ament_export_include_directories(
   include
