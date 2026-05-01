@@ -36,6 +36,12 @@ namespace ethercat_generic_plugins
   public:
     EcMultiplexSlave();
     virtual ~EcMultiplexSlave();
+
+    virtual const ec_sync_info_t *syncs();
+    virtual size_t syncSize();
+    virtual const ec_pdo_entry_info_t *channels();
+    virtual void domains(DomainMap &domains) const;
+
     /** Returns true if drive has reached "operation enabled" state.
      *  The transition through the state machine is handled automatically. */
     bool initialized();

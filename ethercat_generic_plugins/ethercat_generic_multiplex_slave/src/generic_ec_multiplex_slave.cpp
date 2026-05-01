@@ -32,6 +32,23 @@ namespace ethercat_generic_plugins
 
   bool EcMultiplexSlave::initialized() { return initialized_; }
 
+  const ec_sync_info_t *EcMultiplexSlave::syncs()
+  {
+    return subUnits_[0]->syncs();
+  }
+  size_t EcMultiplexSlave::syncSize()
+  {
+    return subUnits_[0]->syncSize();
+  }
+  const ec_pdo_entry_info_t *EcMultiplexSlave::channels()
+  {
+    return subUnits_[0]->channels();
+  }
+  void EcMultiplexSlave::domains(DomainMap &domains) const
+  {
+    subUnits_[0]->domains(domains);
+  }
+
   void EcMultiplexSlave::processData(size_t entry_idx, uint8_t *domain_address)
   {
     subUnits_[0]->processData(entry_idx, domain_address);
