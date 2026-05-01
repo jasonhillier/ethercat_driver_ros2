@@ -87,7 +87,15 @@ namespace ethercat_generic_plugins
     if (subUnits_[0] == nullptr)
     {
       subUnits_[0] = new EcCiA402Drive();
-      return subUnits_[0]->setupSlave(slave_parameters, state_interface, command_interface);
+      auto r = subUnits_[0]->setupSlave(slave_parameters, state_interface, command_interface);
+      // hack copy internal config data !!!
+      subUnits_[0]->alias_ = alias_;
+      subUnits_[0]->position_ = position_;
+      subUnits_[0]->vendor_id_ = vendor_id_;
+      subUnits_[0]->product_id_ = product_id_;
+      subUnits_[0]->sdo_config = sdo_config;
+      // !!!
+      return r;
     }
     return true;
   }
