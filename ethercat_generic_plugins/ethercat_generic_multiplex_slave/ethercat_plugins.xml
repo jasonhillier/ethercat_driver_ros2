@@ -1,4 +1,4 @@
-<library path="ethercat_generic_ec_multiplex_slave">
+<library path="ethercat_generic_multiplex_slave">
   <class name="ethercat_generic_plugins/EcMultiplexSlave" type="ethercat_generic_plugins::EcMultiplexSlave" base_class_type="ethercat_interface::EcSlave">
     <description>Generic EtherCAT Slave Multiplexer.</description>
   </class>
