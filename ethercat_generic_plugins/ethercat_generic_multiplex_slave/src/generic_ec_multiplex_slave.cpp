@@ -65,6 +65,14 @@ namespace ethercat_generic_plugins
 
   void EcMultiplexSlave::processData(size_t entry_idx, uint8_t *domain_address)
   {
+    // hack copy internal config data !!!
+    subUnits_[0].alias_ = alias_;
+    subUnits_[0].position_ = position_;
+    subUnits_[0].vendor_id_ = vendor_id_;
+    subUnits_[0].product_id_ = product_id_;
+    subUnits_[0]->sdo_config = sdo_config;
+    // !!!
+
     subUnits_[0]->processData(entry_idx, domain_address);
     initialized_ = subUnits_[0]->initialized();
   }
