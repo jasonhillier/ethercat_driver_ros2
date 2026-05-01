@@ -32,6 +32,11 @@ namespace ethercat_generic_plugins
 
   bool EcMultiplexSlave::initialized() { return initialized_; }
 
+  void EcMultiplexSlave::set_state_is_operational(bool value)
+  {
+    subUnits_[0]->set_state_is_operational(value);
+  }
+
   int EcMultiplexSlave::assign_activate_dc_sync()
   {
     if (subUnits_[0] != nullptr)

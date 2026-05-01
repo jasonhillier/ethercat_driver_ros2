@@ -38,6 +38,7 @@ namespace ethercat_generic_plugins
     virtual ~EcMultiplexSlave();
     virtual int assign_activate_dc_sync();
 
+    virtual void set_state_is_operational(bool value);
     virtual const ec_sync_info_t *syncs();
     virtual size_t syncSize();
     virtual const ec_pdo_entry_info_t *channels();
