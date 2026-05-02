@@ -84,8 +84,10 @@ namespace ethercat_generic_plugins
       // merge all SDOs together
       for (const auto &sdo : subUnit->sdo_config)
       {
-        sdo_config.push_back(sdo);
+        sdo_master_config.push_back(sdo);
       }
+
+      sdo_config = sdo_master_config;
       // !!!
       return r;
     }
