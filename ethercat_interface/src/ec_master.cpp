@@ -217,6 +217,10 @@ void EcMaster::registerPDOInDomain(
     pdo_reg.position = slave->position_;
     pdo_reg.vendor_id = slave->vendor_id_;
     pdo_reg.product_code = slave->product_id_;
+
+    std::cout << "ch indx " << i << std::endl;
+    std::cout << "ch indice " << channel_indices[i] << std::endl;
+
     pdo_reg.index = pdo_regs[channel_indices[i]].index;
     pdo_reg.subindex = pdo_regs[channel_indices[i]].subindex;
     pdo_reg.offset = &(domain_entry.offset[i]);
