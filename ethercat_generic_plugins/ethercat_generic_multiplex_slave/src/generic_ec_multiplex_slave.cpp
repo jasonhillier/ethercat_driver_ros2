@@ -22,6 +22,8 @@
 namespace ethercat_generic_plugins
 {
 
+  static std::vector<ethercat_interface::SdoConfigEntry> sdo_master_config;
+
   EcMultiplexSlave::EcMultiplexSlave()
       : GenericEcSlave() {}
   EcMultiplexSlave::~EcMultiplexSlave() {}
