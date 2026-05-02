@@ -183,10 +183,15 @@ void EcMaster::registerPDOInDomain(
   DomainInfo * domain_info,
   EcSlave * slave)
 {
+
+  std::cout << "Registering PDOs for slave " << slave->alias_ << ":" << slave->position_ << " in domain " << std::endl;
+
   // expand the size of the domain
   uint32_t num_pdo_regs = channel_indices.size();
   size_t start_index = domain_info->domain_regs.size() - 1;  // empty element at end
   domain_info->domain_regs.resize(domain_info->domain_regs.size() + num_pdo_regs);
+
+  std::cout << "domain entries" << std::endl;
 
   // create a new entry in the domain
   DomainInfo::Entry domain_entry;
@@ -198,6 +203,8 @@ void EcMaster::registerPDOInDomain(
 
   EcSlave::DomainMap domain_map;
   slave->domains(domain_map);
+
+  std::cout << "pdo array entries" << std::endl;
 
   // add to array of pdos registrations
   const ec_pdo_entry_info_t * pdo_regs = slave->channels();
