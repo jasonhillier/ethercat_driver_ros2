@@ -1,0 +1,5 @@
+<library path="ethercat_stateproxy_slave">
+  <class name="ethercat_generic_plugins/EcStateProxySlave" type="ethercat_generic_plugins::EcStateProxySlave" base_class_type="ethercat_interface::EcSlave">
+    <description>Generic EtherCAT Slave state proxy.</description>
+  </class>
+</library>
