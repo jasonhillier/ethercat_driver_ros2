@@ -60,7 +60,7 @@ namespace ethercat_generic_plugins
     EcCiA402Drive *subUnit = nullptr;
     bool initialized_ = false;
 
-    static std::vector<SdoConfigEntry> sdo_master_config;
+    static std::vector<ethercat_interface::SdoConfigEntry> sdo_master_config;
   };
 } // namespace ethercat_generic_plugins
 
