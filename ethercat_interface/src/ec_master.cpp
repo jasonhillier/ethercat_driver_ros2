@@ -103,6 +103,13 @@ void EcMaster::addSlave(EcSlave * slave)
     return;
   }
 
+  //does this work?
+  ecrt_slave_config_overlapping_pdos(
+      slave_info.config, /**< Slave configuration. */
+      1 /**< Allow overlapping PDOs */
+    );
+
+
   // check and setup dc
 
   if (slave->assign_activate_dc_sync()) {
