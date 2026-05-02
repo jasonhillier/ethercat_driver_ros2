@@ -208,8 +208,8 @@ void EcMaster::registerPDOInDomain(
 
   // add to array of pdos registrations
   const ec_pdo_entry_info_t * pdo_regs = slave->channels();
-  std::cout << "channels: " << pdo_regs.size() << std::endl;
-  
+  std::cout << "channels: " << pdo_regs->size() << std::endl;
+
   for (size_t i = 0; i < num_pdo_regs; ++i) {
     // create pdo entry in the domain
     ec_pdo_entry_reg_t & pdo_reg = domain_info->domain_regs[start_index + i];
