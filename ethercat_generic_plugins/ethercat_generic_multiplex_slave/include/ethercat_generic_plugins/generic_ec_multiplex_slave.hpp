@@ -40,9 +40,11 @@ namespace ethercat_generic_plugins
     virtual int assign_activate_dc_sync();
 
     virtual void set_state_is_operational(bool value);
+    /*
     virtual const ec_sync_info_t *syncs();
     virtual size_t syncSize();
     virtual const ec_pdo_entry_info_t *channels();
+    */
     virtual void domains(DomainMap &domains) const;
 
     /** Returns true if drive has reached "operation enabled" state.
@@ -61,6 +63,8 @@ namespace ethercat_generic_plugins
     bool initialized_ = false;
 
     static inline std::vector<ethercat_interface::SdoConfigEntry> sdo_master_config;
+    static inline std::vector<ec_pdo_info_t> master_rpdos_;
+    static inline std::vector<ec_pdo_info_t> master_tpdos_;
   };
 } // namespace ethercat_generic_plugins
 

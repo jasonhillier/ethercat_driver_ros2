@@ -41,7 +41,7 @@ namespace ethercat_generic_plugins
     }
     return 0;
   }
-
+  /*
   const ec_sync_info_t *EcMultiplexSlave::syncs()
   {
     return subUnit->syncs();
@@ -54,6 +54,7 @@ namespace ethercat_generic_plugins
   {
     return subUnit->channels();
   }
+  */
   void EcMultiplexSlave::domains(DomainMap &domains) const
   {
     subUnit->domains(domains);
@@ -82,13 +83,27 @@ namespace ethercat_generic_plugins
       vendor_id_ = subUnit->vendor_id_;
       product_id_ = subUnit->product_id_;
       // merge all SDOs together
+      /*
       for (const auto &sdo : subUnit->sdo_config)
       {
         sdo_master_config.push_back(sdo);
       }
+      */
 
-      sdo_config = sdo_master_config;
+      sdo_config = subUnit->sdo_config;
       // !!!
+
+      // merge all PDOs together
+      for (const auto &rpdo : subUnit->rpdos_)
+      {
+        master_rpdos_.push_back(rpdo);
+      }
+      for (const auto &tpdo : subUnit->tpdos_)
+      {
+        master_tpdos_.push_back(tpdo);
+      }
+      rpdos_ = master_rpdos_;
+      tpdos_ = master_tpdos_;
       return r;
     }
     return true;
