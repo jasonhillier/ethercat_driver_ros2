@@ -209,17 +209,6 @@ void EcMaster::registerPDOInDomain(
   // add to array of pdos registrations
   const ec_pdo_entry_info_t * pdo_regs = slave->channels();
   for (size_t i = 0; i < num_pdo_regs; ++i) {
-    // create pdo entry in the domain
-    ec_pdo_entry_reg_t & pdo_reg = domain_info->domain_regs[start_index + i];
-    pdo_reg.alias = slave->alias_;
-    pdo_reg.position = slave->position_;
-    pdo_reg.vendor_id = slave->vendor_id_;
-    pdo_reg.product_code = slave->product_id_;
-    pdo_reg.index = pdo_regs[channel_indices[i]].index;
-    pdo_reg.subindex = pdo_regs[channel_indices[i]].subindex;
-    pdo_reg.offset = &(domain_entry.offset[i]);
-    pdo_reg.bit_position = &(domain_entry.bit_position[i]);
-
 
     // print the domain pdo entry
     RCLCPP_INFO(
@@ -232,6 +221,18 @@ void EcMaster::registerPDOInDomain(
       pdo_reg.index,
       static_cast<int>(pdo_reg.subindex)
     );
+
+    // create pdo entry in the domain
+    ec_pdo_entry_reg_t & pdo_reg = domain_info->domain_regs[start_index + i];
+    pdo_reg.alias = slave->alias_;
+    pdo_reg.position = slave->position_;
+    pdo_reg.vendor_id = slave->vendor_id_;
+    pdo_reg.product_code = slave->product_id_;
+    pdo_reg.index = pdo_regs[channel_indices[i]].index;
+    pdo_reg.subindex = pdo_regs[channel_indices[i]].subindex;
+    pdo_reg.offset = &(domain_entry.offset[i]);
+    pdo_reg.bit_position = &(domain_entry.bit_position[i]);
+    
   }
 
   // set the last element to null
