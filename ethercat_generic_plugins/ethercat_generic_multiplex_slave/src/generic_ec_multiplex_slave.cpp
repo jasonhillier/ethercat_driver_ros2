@@ -104,6 +104,8 @@ namespace ethercat_generic_plugins
       }
       rpdos_ = master_rpdos_;
       tpdos_ = master_tpdos_;
+
+      setup_syncs();
       return r;
     }
     return true;
