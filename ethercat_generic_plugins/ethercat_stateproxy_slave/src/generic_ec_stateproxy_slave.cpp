@@ -33,6 +33,7 @@ namespace ethercat_generic_plugins
 
   void EcStateProxySlave::processData(size_t entry_idx, uint8_t *domain_address)
   {
+    return GenericEcSlave::processData(entry_idx, domain_address);
   }
 
   bool EcStateProxySlave::setupSlave(
@@ -40,7 +41,7 @@ namespace ethercat_generic_plugins
       std::vector<double> *state_interface,
       std::vector<double> *command_interface)
   {
-    return true;
+    return GenericEcSlave::setupSlave(slave_parameters, state_interface, command_interface);
   }
 
 } // namespace ethercat_generic_plugins
