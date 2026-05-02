@@ -23,58 +23,46 @@ namespace ethercat_generic_plugins
 {
 
   EcMultiplexSlave::EcMultiplexSlave()
-      : GenericEcSlave()
-  {
-
-    std::cout << "Creating Multiplex Slave" << std::endl;
-  }
+      : GenericEcSlave() {}
   EcMultiplexSlave::~EcMultiplexSlave() {}
 
   bool EcMultiplexSlave::initialized() { return initialized_; }
 
   void EcMultiplexSlave::set_state_is_operational(bool value)
   {
-    subUnits_[0]->set_state_is_operational(value);
+    subUnit->set_state_is_operational(value);
   }
 
   int EcMultiplexSlave::assign_activate_dc_sync()
   {
-    if (subUnits_[0] != nullptr)
+    if (subUnit != nullptr)
     {
-      return subUnits_[0]->assign_activate_dc_sync();
+      return subUnit->assign_activate_dc_sync();
     }
     return 0;
   }
 
   const ec_sync_info_t *EcMultiplexSlave::syncs()
   {
-    return subUnits_[0]->syncs();
+    return subUnit->syncs();
   }
   size_t EcMultiplexSlave::syncSize()
   {
-    return subUnits_[0]->syncSize();
+    return subUnit->syncSize();
   }
   const ec_pdo_entry_info_t *EcMultiplexSlave::channels()
   {
-    return subUnits_[0]->channels();
+    return subUnit->channels();
   }
   void EcMultiplexSlave::domains(DomainMap &domains) const
   {
-    subUnits_[0]->domains(domains);
+    subUnit->domains(domains);
   }
 
   void EcMultiplexSlave::processData(size_t entry_idx, uint8_t *domain_address)
   {
-    // hack copy internal config data !!!
-    // alias_ = subUnits_[0]->alias_;
-    // position_ = subUnits_[0]->position_;
-    // vendor_id_ = subUnits_[0]->vendor_id_;
-    // product_id_ = subUnits_[0]->product_id_;
-    // sdo_config = subUnits_[0]->sdo_config;
-    // !!!
-
-    subUnits_[0]->processData(entry_idx, domain_address);
-    initialized_ = subUnits_[0]->initialized();
+    subUnit->processData(entry_idx, domain_address);
+    initialized_ = subUnit->initialized();
   }
 
   bool EcMultiplexSlave::setupSlave(
@@ -84,16 +72,20 @@ namespace ethercat_generic_plugins
   {
     std::cout << "Setting up Multiplex Slave" << std::endl;
 
-    if (subUnits_[0] == nullptr)
+    if (subUnit == nullptr)
     {
-      subUnits_[0] = new EcCiA402Drive();
-      auto r = subUnits_[0]->setupSlave(slave_parameters, state_interface, command_interface);
+      subUnit = new EcCiA402Drive();
+      auto r = subUnit->setupSlave(slave_parameters, state_interface, command_interface);
       // hack copy internal config data !!!
-      alias_ = subUnits_[0]->alias_;
-      position_ = subUnits_[0]->position_;
-      vendor_id_ = subUnits_[0]->vendor_id_;
-      product_id_ = subUnits_[0]->product_id_;
-      sdo_config = subUnits_[0]->sdo_config;
+      alias_ = subUnit->alias_;
+      position_ = subUnit->position_;
+      vendor_id_ = subUnit->vendor_id_;
+      product_id_ = subUnit->product_id_;
+      // merge all SDOs together
+      for (const auto &sdo : subUnit->sdo_config)
+      {
+        sdo_config.push_back(sdo);
+      }
       // !!!
       return r;
     }

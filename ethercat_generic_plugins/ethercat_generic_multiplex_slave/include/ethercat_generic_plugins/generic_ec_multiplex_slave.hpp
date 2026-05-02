@@ -27,6 +27,7 @@
 #include "ethercat_interface/ec_pdo_single_interface_channel_manager.hpp"
 #include "ethercat_generic_plugins/generic_ec_slave.hpp"
 #include "ethercat_generic_plugins/generic_ec_cia402_drive.hpp"
+#include "ethercat_interface/ec_sdo_manager.hpp"
 
 namespace ethercat_generic_plugins
 {
@@ -56,8 +57,10 @@ namespace ethercat_generic_plugins
         std::vector<double> *command_interface);
 
   protected:
-    EcCiA402Drive *subUnits_[2] = {nullptr, nullptr};
+    EcCiA402Drive *subUnit = nullptr;
     bool initialized_ = false;
+
+    static std::vector<SdoConfigEntry> sdo_master_config;
   };
 } // namespace ethercat_generic_plugins
 
