@@ -50,11 +50,12 @@ namespace ethercat_generic_plugins
   {
     return subUnit->syncSize();
   }
+  */
   const ec_pdo_entry_info_t *EcMultiplexSlave::channels()
   {
     return subUnit->channels();
   }
-  */
+  
   void EcMultiplexSlave::domains(DomainMap &domains) const
   {
     subUnit->domains(domains);
