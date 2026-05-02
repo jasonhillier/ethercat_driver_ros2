@@ -223,7 +223,9 @@ void EcMaster::registerPDOInDomain(
 
     pdo_reg.index = pdo_regs[channel_indices[i]].index;
     pdo_reg.subindex = pdo_regs[channel_indices[i]].subindex;
+    std::cout << "a" << std::endl;
     pdo_reg.offset = &(domain_entry.offset[i]);
+    std::cout << "b" << std::endl;
     pdo_reg.bit_position = &(domain_entry.bit_position[i]);
 
 
