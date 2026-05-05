@@ -56,7 +56,7 @@ void EcCiA402Drive::processData(size_t entry_idx, uint8_t * domain_address)
     pdo_channels_info_[index]);
   ethercat_interface::EcPdoSingleInterfaceChannelManager & channel(*channel_ptr);
   // Special case: ControlWord
-  if (channel.index == CiA402D_RPDO_CONTROLWORD) {
+  if (channel.index == (pdo_offset_ + CiA402D_RPDO_CONTROLWORD)) {
     if (is_operational_) {
       if (fault_reset_command_interface_index_ >= 0) {
         if (command_interface_ptr_->at(fault_reset_command_interface_index_) == 0) {
@@ -80,7 +80,7 @@ void EcCiA402Drive::processData(size_t entry_idx, uint8_t * domain_address)
   }
 
   // setup current position as default position
-  if (channel.index == CiA402D_RPDO_POSITION) {
+  if (channel.index == (pdo_offset_ + CiA402D_RPDO_POSITION)) {
     if (mode_of_operation_display_ != ModeOfOperation::MODE_NO_MODE) {
       channel.default_value =
         channel.factor * last_position_ + channel.offset;
@@ -90,7 +90,7 @@ void EcCiA402Drive::processData(size_t entry_idx, uint8_t * domain_address)
   }
 
   // setup mode of operation
-  if (channel.index == CiA402D_RPDO_MODE_OF_OPERATION) {
+  if (channel.index == (pdo_offset_ + CiA402D_RPDO_MODE_OF_OPERATION)) {
     if (mode_of_operation_ >= 0 && mode_of_operation_ <= 10) {
       channel.default_value = mode_of_operation_;
     }
@@ -99,16 +99,16 @@ void EcCiA402Drive::processData(size_t entry_idx, uint8_t * domain_address)
   channel.ec_update(domain_address);
 
   // get mode_of_operation_display_
-  if (channel.index == CiA402D_TPDO_MODE_OF_OPERATION_DISPLAY) {
+  if (channel.index == (pdo_offset_ + CiA402D_TPDO_MODE_OF_OPERATION_DISPLAY)) {
     mode_of_operation_display_ = channel.last_value;
   }
 
-  if (channel.index == CiA402D_TPDO_POSITION) {
+  if (channel.index == (pdo_offset_ + CiA402D_TPDO_POSITION)) {
     last_position_ = channel.last_value;
   }
 
   // Special case: StatusWord
-  if (channel.index == CiA402D_TPDO_STATUSWORD) {
+  if (channel.index == (pdo_offset_ + CiA402D_TPDO_STATUSWORD)) {
     status_word_ = channel.last_value;
   }
 
@@ -142,6 +142,15 @@ bool EcCiA402Drive::setupSlave(
 
   if (parameters_.find("mode_of_operation") != parameters_.end()) {
     mode_of_operation_ = std::stod(parameters_["mode_of_operation"]);
+  }
+
+  if (parameters_.find("pdo_offset") != parameters_.end()) {
+    pdo_offset_ = std::stoi(parameters_["pdo_offset"], nullptr, 16);
+    RCLCPP_INFO(
+        rclcpp::get_logger("EthercatDriver"),
+        "cia402 pdo_offset: 0x%x",
+        pdo_offset_
+      );
   }
 
   if (parameters_.find("command_interface/reset_fault") != parameters_.end()) {
