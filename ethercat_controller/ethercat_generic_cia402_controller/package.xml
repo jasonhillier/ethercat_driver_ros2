@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>ethercat_generic_cia402_controller</name>
+  <version>2.0.0</version>
+  <description>EtherCAT CiA402 drive controllers for EcCiA402Drive. The package has been derived by the branch https://github.com/ICube-Robotics/ethercat_driver_ros2/tree/mcbed-ec-cia402-controller</description>
+  <maintainer email="mcbed.robotics@gmail.com">Maciej Bednarczyk</maintainer>
+  <maintainer email="nicola.pedrocchi@cnr.it">Nicola Pedrocchi</maintainer>
+  <maintainer email="alessio.prini@cnr.it">Alessio Prini</maintainer>
+  <maintainer email="adriano.scibilia@cnr.it">Adriano Scibilia</maintainer>
+
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>controller_interface</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>realtime_tools</depend>
+  <depend>ethercat_msgs</depend>
+  <depend>ethercat_controller_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>backward_ros</depend>
+
+  <build_depend>pluginlib</build_depend>
+
+  <test_depend>ament_cmake_gmock</test_depend>
+  <test_depend>controller_manager</test_depend>
+  <test_depend>hardware_interface</test_depend>
+  <test_depend>ros2_control_test_assets</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
