@@ -684,6 +684,8 @@ bool CiA402Controller::backward_state(std::string& message)
       desired_states[i] = actual_state_[i];
       desired_states[i]--;
       state_req->drive_states[i] = state_int_to_str(desired_states[i]);
+
+      RCLCPP_INFO(get_node()->get_logger(), "Moving drive %s from state %s to state %s", dof_names_[i].c_str(), state_int_to_str(actual_state_[i]).c_str(), state_int_to_str(desired_states[i]).c_str());
     }
     else if (actual_state_[i] == ethercat_controller_msgs::msg::Cia402DriveStates::STATE_SWITCH_ON_DISABLED)
     {
