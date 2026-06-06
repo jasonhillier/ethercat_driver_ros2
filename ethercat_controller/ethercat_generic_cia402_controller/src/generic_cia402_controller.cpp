@@ -375,6 +375,7 @@ uint16_t CiA402Controller::calc_controlword(uint8_t act_state, uint8_t next_stat
     if(possible_transitions.size() == 0 || possible_transitions.size() > 1 )
     {
         RCLCPP_ERROR(get_node()->get_logger(), "TRANSITIONS FOUND %zu: ", possible_transitions.size() );
+        RCLCPP_ERROR(get_node()->get_logger(), " FROM %s to %s ", state_int_to_str(act_state).c_str(), state_int_to_str(next_state).c_str() );
         for(size_t i=0;i<possible_transitions.size(); i++)
         {
             RCLCPP_ERROR (get_node()->get_logger(), "\t  FOUND TRANSITIONS : %s", TRANSITIONID_STRINGS.at(  possible_transitions.at(i) ).c_str() );
