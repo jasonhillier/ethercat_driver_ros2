@@ -390,6 +390,8 @@ uint16_t CiA402Controller::calc_controlword(uint8_t act_state, uint8_t next_stat
     
         ret = new_controlword;
     }
+
+    RCLCPP_ERROR (get_node()->get_logger(), "\t  CONTROL WORD : %s", std::to_string(ret).c_str() );
     return ret;
 }
 
